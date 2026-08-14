@@ -18,7 +18,11 @@ loader = UnstructuredMarkdownLoader(markdown_path)
 docs = loader.load()
 
 # 文本分块
-text_splitter = RecursiveCharacterTextSplitter()
+text_splitter = RecursiveCharacterTextSplitter(["\n\n", "\n", " ", ""])
+# 块大小 默认4000
+text_splitter.chunk_size=50
+# 块重叠 默认200
+text_splitter.chunk_overlap=0
 chunks = text_splitter.split_documents(docs)
 
 # 中文嵌入模型
@@ -72,4 +76,13 @@ retrieved_docs = vectorstore.similarity_search(question, k=3)
 docs_content = "\n\n".join(doc.page_content for doc in retrieved_docs)
 
 answer = llm.invoke(prompt.format(question=question, context=docs_content))
-print(answer)
+print(answer.content)
+
+
+# 1.准备知识库
+# 2.对知识库文本分块
+# 3.用嵌入模型计算知识库文本块向量，并搭建向量索引
+# 4.用户输入问题
+# 5.用同一个嵌入模型计算问题的向量
+# 6.用向量索引提取出与问题向量相似的文本
+# 7.回答用户
