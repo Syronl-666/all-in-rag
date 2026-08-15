@@ -2,6 +2,7 @@ from langchain_experimental.text_splitter import SemanticChunker
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.document_loaders import TextLoader
 
+#文本嵌入引擎，计算文本向量
 embeddings = HuggingFaceEmbeddings(
     model_name="BAAI/bge-small-zh-v1.5",
     model_kwargs={'device': 'cpu'},

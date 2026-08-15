@@ -1,4 +1,5 @@
 from unstructured.partition.auto import partition
+# from unstructured.partition.pdf import partition_pdf
 
 # PDF文件路径
 pdf_path = "../../data/C2/pdf/rag.pdf"
@@ -6,6 +7,7 @@ pdf_path = "../../data/C2/pdf/rag.pdf"
 # 使用Unstructured加载并解析PDF文档
 elements = partition(
     filename=pdf_path,
+    # strategy="ocr_only",
     content_type="application/pdf"
 )
 
