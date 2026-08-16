@@ -21,15 +21,15 @@ print(f"FAISS index has been saved to {local_faiss_path}")
 
 # 3. 加载索引并执行查询
 # 加载时需指定相同的嵌入模型，并允许反序列化
-loaded_vectorstore = FAISS.load_local(
+loaded_vectorstore = FAISS.load_local( # 与上面的from_documents返回的对象相同,都是FAISS向量库对象,上面的是根据文档新建索引库,这个是直接从本地路径获取
     local_faiss_path,
     embeddings,
     allow_dangerous_deserialization=True
 )
 
 # 执行相似性搜索
-query = "FAISS是做什么的？"
-results = loaded_vectorstore.similarity_search(query, k=1)
+query = "王五"
+results = loaded_vectorstore.similarity_search(query, k=1)  # 先对query进行同嵌入模型计算向量,然后向量库据此向量索引查询相似数据,k为Top-k
 
 print(f"\n查询: '{query}'")
 print("相似度最高的文档:")

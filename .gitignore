@@ -71,3 +71,6 @@ rag/
 # LLM API keys
 *.key
 *.secret
+
+# llamaindex_out_store
+**/llamaindex_index_store/
