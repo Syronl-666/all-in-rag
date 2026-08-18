@@ -16,6 +16,11 @@ documents = SimpleDirectoryReader(
 
 # 3. 创建节点与构建索引
 # 3.1 句子窗口索引
+'''
+以句子分块,并与相邻范围的几个句子放入一个元数据字段window
+在计算向量时,依然只计算分块时的单个句子,只有当传递给LLM时,把它知道的一切(window内容)都说出去
+既有了高准确率还有了上下文
+'''
 node_parser = SentenceWindowNodeParser.from_defaults(
     window_size=3,
     window_metadata_key="window",
@@ -32,6 +37,7 @@ base_index = VectorStoreIndex(base_nodes)
 # 4. 构建查询引擎
 sentence_query_engine = sentence_index.as_query_engine(
     similarity_top_k=2,
+    #MetadataReplacementPostProcessor方法就是用整个句子window替换向量句子,偷梁换柱
     node_postprocessors=[
         MetadataReplacementPostProcessor(target_metadata_key="window")
     ],

@@ -1,12 +1,12 @@
 import os
-from tqdm import tqdm
-from glob import glob
-import torch
-from visual_bge.visual_bge.modeling import Visualized_BGE
-from pymilvus import MilvusClient, FieldSchema, CollectionSchema, DataType
+from tqdm import tqdm   # 进度条
+from glob import glob   # 目录工具
+import torch    
+from visual_bge.visual_bge.modeling import Visualized_BGE   # 多模态嵌入模型
+from pymilvus import MilvusClient, FieldSchema, CollectionSchema, DataType  # 向量索引库
 import numpy as np
-import cv2
-from PIL import Image
+import cv2  # 图像处理
+from PIL import Image   # 图片访问
 
 # 1. 初始化设置
 MODEL_NAME = "BAAI/bge-base-en-v1.5"
