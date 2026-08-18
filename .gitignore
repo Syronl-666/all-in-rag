@@ -74,3 +74,6 @@ rag/
 
 # llamaindex_out_store
 **/llamaindex_index_store/
+
+# milvus docker file
+**/volumes/
